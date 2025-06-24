@@ -1,11 +1,5 @@
 import React, { useState } from 'react';
-import {
-  FaHome,
-  FaShoppingCart,
-  FaClipboardList,
-  FaPhotoVideo,
-  FaUser,
-} from 'react-icons/fa';
+
 import CartIcon from '../icons/CartIcon';
 import HomeIcon from '../icons/HomeIcon';
 import FrameIcon from '../icons/FrameIcon';
@@ -13,7 +7,7 @@ import MediaIcon from '../icons/MediaIcon';
 import UserIcon from '../icons/UserIcon';
 
 const BottomNavigation = () => {
-  const [activeTab, setActiveTab] = useState('home');
+  const [active, setActive] = useState('Home');
 
   const navItems = [
     { id: 'home', label: 'Home', icon: <HomeIcon />, path: '/' },
@@ -42,7 +36,7 @@ const BottomNavigation = () => {
       path: '/profile',
     },
   ];
-  const [active, setActive] = useState('Home');
+
   return (
     <div className=' my-10 mx-auto bottom-4  bg-white shadow-[0px_-20px_100px_0px_#65358A1A] rounded-full  flex justify-between md:gap-16 px-[25px] py-4 max-w-[492px] border border-[#65358A14]'>
       {navItems.map(({ label, icon: Icon }) => (
