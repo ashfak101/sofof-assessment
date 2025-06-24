@@ -1,42 +1,73 @@
 import React, { useState } from 'react';
-import { FaHome, FaShoppingCart, FaClipboardList, FaPhotoVideo, FaUser } from 'react-icons/fa';
-
+import {
+  FaHome,
+  FaShoppingCart,
+  FaClipboardList,
+  FaPhotoVideo,
+  FaUser,
+} from 'react-icons/fa';
+import CartIcon from '../icons/CartIcon';
+import HomeIcon from '../icons/HomeIcon';
+import FrameIcon from '../icons/FrameIcon';
+import MediaIcon from '../icons/MediaIcon';
+import UserIcon from '../icons/UserIcon';
 
 const BottomNavigation = () => {
   const [activeTab, setActiveTab] = useState('home');
 
   const navItems = [
-    { id: 'home', label: 'Home', icon: <FaHome size={20} />, path: '/' },
-    { id: 'cart', label: 'Cart', icon: <FaShoppingCart size={20} />, path: '/cart' },
-    { id: 'orders', label: 'Orders', icon: <FaClipboardList size={20} />, path: '/orders' },
-    { id: 'media', label: 'Media', icon: <FaPhotoVideo size={20} />, path: '/media' },
-    { id: 'profile', label: 'Profile', icon: <FaUser size={20} />, path: '/profile' },
+    { id: 'home', label: 'Home', icon: <HomeIcon />, path: '/' },
+    {
+      id: 'cart',
+      label: 'Cart',
+      icon: <CartIcon />,
+      path: '/cart',
+    },
+    {
+      id: 'orders',
+      label: 'Orders',
+      icon: <FrameIcon />,
+      path: '/orders',
+    },
+    {
+      id: 'media',
+      label: 'Media',
+      icon: <MediaIcon />,
+      path: '/media',
+    },
+    {
+      id: 'profile',
+      label: 'Profile',
+      icon: <UserIcon />,
+      path: '/profile',
+    },
   ];
-
+  const [active, setActive] = useState('Home');
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 flex justify-center">
-      <div className="max-w-[492px] w-full bg-white border border-[#65358A14] shadow-[0px_-20px_100px_0px_#65358A1A]">
-        <div className="flex justify-around items-center h-16">
-          {navItems.map((item) => (
-            <a
-              href={item.path}
-              key={item.id}
-              onClick={() => setActiveTab(item.id)}
-              className={`relative flex flex-col items-center justify-center h-full ${
-                activeTab === item.id
-                  ? 'text-[#65358A] w-[78px]'
-                  : 'text-gray-500 w-full'
-              }`}
-            >
-              {activeTab === item.id && (
-                <div className="absolute inset-0 h-[64px] w-[78px] rounded-l-[32px] border-t border-b border-l border-[#65358A] opacity-30 bg-gradient-to-br from-[#65358A] to-transparent" />
-              )}
-              <div className="relative z-10">{item.icon}</div>
-              <span className="relative z-10 text-xs mt-1">{item.label}</span>
-            </a>
-          ))}
+    <div className=' my-10 mx-auto bottom-4  bg-white shadow-[0px_-20px_100px_0px_#65358A1A] rounded-full  flex justify-between md:gap-16 px-[25px] py-4 max-w-[492px] border border-[#65358A14]'>
+      {navItems.map(({ label, icon: Icon }) => (
+        <div
+          key={label}
+          onClick={() => setActive(label)}
+          className='flex flex-col items-center justify-center text-xs text-gray-700 cursor-pointer relative group'>
+          <div
+            className={` flex items-center text-gray-700 justify-center l transition-all duration-200 ${
+              active === label ? ' text-purple-700' : ''
+            }`}>
+            {Icon}
+          </div>
+          <span
+            className={`mt-1 rounded-full w-1 h-1 duration-200 pointer-events-none
+            ${active === label ? 'bg-[#65358A]' : ''}
+            `}></span>
+          <span
+            className={`mt-1 text-xs md:text-xl  absolute bottom-[-50px] ${
+              active === label ? 'text-[#65358A] font-medium' : 'text-[#222222]'
+            }`}>
+            {label}
+          </span>
         </div>
-      </div>
+      ))}
     </div>
   );
 };
